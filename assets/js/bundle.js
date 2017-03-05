@@ -1093,6 +1093,6 @@ exports.registers = registers;
 exports.register = register;
 exports.getById = getById;
 
-}((this.main = this.main || {})));
+})(this);
 
 //# sourceMappingURL=bundle.js.map
