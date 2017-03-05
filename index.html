@@ -3,6 +3,7 @@
         <title>Visual MIPS</title>
         <link rel="stylesheet" href="./assets/js/codemirror-5.23.0/lib/codemirror.css" />
         <link rel="stylesheet" href="./assets/js/codemirror-5.23.0/theme/monokai.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
         <script src="./assets/js/codemirror-5.23.0/lib/codemirror.js"></script>
         <script src="./assets/js/codemirror-5.23.0/mode/javascript/javascript.js"></script>
     </head>
@@ -11,7 +12,8 @@
             <textarea id="editor">
             </textarea>
             <br>
-            <input type="submit" value="Submit" onclick="execute(); return false;">
+              <button class="btn waves-effect waves-light" type="submit" name="action" onclick="execute(); return false;">Submit
+              </button>
         </form>
         <br>
         <i> MIPS code output should display here after pressing submit button </i>
