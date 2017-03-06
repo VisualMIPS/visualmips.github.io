@@ -12,11 +12,18 @@
             <textarea id="editor">
             </textarea>
             <br>
-              <button class="btn waves-effect waves-light" type="submit" name="action" onclick="execute(); return false;">Submit
-              </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="execute(); return false;">Execute
+            </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Reset
+            </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Step Backwards
+            </button>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Step Forward
+            </button>
         </form>
         <br>
         <i> MIPS code output should display here after pressing submit button </i>
+        <i id="operatingSystem"></i>
         <div id="output"></div>
         <script>
             var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("editor"),{
@@ -32,6 +39,18 @@
                 var div = document.getElementById('output');
                 div.innerHTML += "<br> <strong>Output of this instruction is : " + myCodeMirror.getValue() + "</strong>"
             }
+            
+            window.onload = function() {
+                // detect OS for Electron download
+                var OSName="Unknown OS";
+                if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+                if (navigator.appVersion.indexOf("Mac")!=-1) OSName="macOS";
+                if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+                if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+                var e = document.getElementById('operatingSystem')
+                e.innerHTML = "<br>Your OS : " + OSName;
+            }
+
         </script>
     </body>
 </html>
