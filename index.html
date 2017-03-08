@@ -4,27 +4,166 @@
         <link rel="stylesheet" href="./assets/js/codemirror-5.23.0/lib/codemirror.css" />
         <link rel="stylesheet" href="./assets/js/codemirror-5.23.0/theme/monokai.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
         <script src="./assets/js/codemirror-5.23.0/lib/codemirror.js"></script>
         <script src="./assets/js/codemirror-5.23.0/mode/javascript/javascript.js"></script>
     </head>
     <body>
-        <form>
-            <textarea id="editor">
-            </textarea>
-            <br>
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="execute(); return false;">Execute
-            </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Reset
-            </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Step Backwards
-            </button>
-            <button class="btn waves-effect waves-light" type="submit" name="action">Step Forward
-            </button>
-        </form>
-        <br>
-        <i> MIPS code output should display here after pressing submit button </i>
-        <i id="operatingSystem"></i>
-        <div id="output"></div>
+        <div class="row">
+            <div class="col s6">
+                <textarea id="editor"></textarea>
+                <div class="col s12">
+                    <br>
+                    <button class="btn waves-effect waves-light" type="submit" name="action" onclick="execute(); return false;">Execute
+                    </button> 
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Reset
+                    </button> 
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Step Backwards
+                    </button> 
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Step Forward
+                    </button> 
+                </div>
+                <div class="col s12">
+                    <br>
+                    <i> MIPS code output should display here after pressing submit button </i>
+                    <i id="operatingSystem"></i>
+                </div>
+                <div class="col s12" id="output"></div>
+                </div>
+            <div class="col s6">
+                <table class="highlight">
+                    <thead>
+                    <tr>
+                        <th data-field="id">Register</th>
+                        <th data-field="name">Value</th>
+                        <th data-field="price">Notation</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>R0</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R1</td>
+                        <td>0000</td>
+                        <td>                            
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R2</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R3</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R4</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R5</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R6</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R7</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R8</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R9</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R10</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R11</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>R12</td>
+                        <td>0000</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light black">HEX</a>&ensp;
+                            <a class="btn waves-effect waves-light black">Decimal</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <script>
             var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("editor"),{
                 lineNumbers: true,
@@ -33,6 +172,7 @@
                 mode:  "javascript",
                 theme: "monokai"
             });
+            myCodeMirror.setSize("100%","50%")
             myCodeMirror.getDoc().setValue('MIPSY stuff goes in here \n\n\n\n');
 
             function execute(){
@@ -50,7 +190,6 @@
                 var e = document.getElementById('operatingSystem')
                 e.innerHTML = "<br>Your OS : " + OSName;
             }
-
         </script>
     </body>
 </html>
