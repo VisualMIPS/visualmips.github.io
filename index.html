@@ -1,5 +1,8 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Visual MIPS - Online MIPS Emulator</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/codemirror.min.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.24.2/theme/monokai.min.css" />
@@ -12,7 +15,7 @@
                 <textarea id="editor"></textarea>
                 <div class="col s12">
                     <br>
-                    <button class="btn waves-effect waves-light" type="submit" name="action" id="execute">Execute
+                    <button class="btn waves-effect waves-light" type="submit" name="action" id="execute" onclick="setToDecimal()">Execute
                     </button> 
                     <button class="btn waves-effect waves-light" type="submit" name="action" id="reset">Reset
                     </button> 
@@ -31,133 +34,376 @@
                 </div>
                 </div>
             <div class="col s6">
-                <table class="highlight">
+                <ul class="tabs">
+                    <li class="tab col s3"><a class="active" href="#registerSet1">Set 1</a></li>
+                    <li class="tab col s3"><a href="#registerSet2">Set 2</a></li>
+                    <li class="tab col s3"><a href="#registerSet3">Set 3</a></li>
+                    <li class="tab col s3"><a href="#PC">PC</a></li>
+                </ul>
+                <table class="highlight" id="registerSet1">
                     <thead>
                     <tr>
-                        <th data-field="id">Register</th>
-                        <th data-field="name">Value</th>
-                        <th data-field="price">Notation</th>
+                        <th data-field="register">Register</th>
+                        <th data-field="value">Value</th>
+                        <th data-field="notation">Notation</th>
                     </tr>
                     </thead>
 
                     <tbody>
                     <tr>
                         <td>R0</td>
-                        <td id="mipsRegister0">1010</td>
+                        <td id="mipsRegister0">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister0BinaryButton" onclick="buttonLogicHandler(0,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister0DecimalButton" onclick="buttonLogicHandler(0,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister0HexButton" onclick="buttonLogicHandler(0,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister0DecimalButton" onclick="buttonLogicHandler(0,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister0BinaryButton" onclick="buttonLogicHandler(0,'binary')">Binary</a>
+                            
+                            
                         </td>
                     </tr>
                     <tr>
                         <td>R1</td>
-                        <td id="mipsRegister1">1010</td>
-                        <td>                            
-                            <a class="btn waves-effect waves-light red" id="mipsRegister1BinaryButton" onclick="buttonLogicHandler(1,'binary')">Binary</a>&ensp;
+                        <td id="mipsRegister1">0</td>
+                        <td>
+                            <a class="btn waves-effect waves-light red" id="mipsRegister1DecimalButton" onclick="buttonLogicHandler(1,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister1HexButton" onclick="buttonLogicHandler(1,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister1DecimalButton" onclick="buttonLogicHandler(1,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister1BinaryButton" onclick="buttonLogicHandler(1,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R2</td>
-                        <td id="mipsRegister2">1010</td>
+                        <td id="mipsRegister2">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister2BinaryButton" onclick="buttonLogicHandler(2,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister2DecimalButton" onclick="buttonLogicHandler(2,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister2HexButton" onclick="buttonLogicHandler(2,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister2DecimalButton" onclick="buttonLogicHandler(2,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister2BinaryButton" onclick="buttonLogicHandler(2,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R3</td>
-                        <td id="mipsRegister3">1010</td>
+                        <td id="mipsRegister3">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister3BinaryButton" onclick="buttonLogicHandler(3,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister3DecimalButton" onclick="buttonLogicHandler(3,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister3HexButton" onclick="buttonLogicHandler(3,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister3DecimalButton" onclick="buttonLogicHandler(3,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister3BinaryButton" onclick="buttonLogicHandler(3,'binary')">Binary</a>
+                            
                         </td>
                     </tr>
                     <tr>
                         <td>R4</td>
-                        <td id="mipsRegister4">1010</td>
+                        <td id="mipsRegister4">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister4BinaryButton" onclick="buttonLogicHandler(4,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister4DecimalButton" onclick="buttonLogicHandler(4,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister4HexButton" onclick="buttonLogicHandler(4,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister4DecimalButton" onclick="buttonLogicHandler(4,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister4BinaryButton" onclick="buttonLogicHandler(4,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R5</td>
-                        <td id="mipsRegister5">1010</td>
+                        <td id="mipsRegister5">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister5BinaryButton" onclick="buttonLogicHandler(5,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister5DecimalButton" onclick="buttonLogicHandler(5,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister5HexButton" onclick="buttonLogicHandler(5,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister5DecimalButton" onclick="buttonLogicHandler(5,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister5BinaryButton" onclick="buttonLogicHandler(5,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R6</td>
-                        <td id="mipsRegister6">1010</td>
+                        <td id="mipsRegister6">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister6BinaryButton" onclick="buttonLogicHandler(6,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister6DecimalButton" onclick="buttonLogicHandler(6,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister6HexButton" onclick="buttonLogicHandler(6,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister6DecimalButton" onclick="buttonLogicHandler(6,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister6BinaryButton" onclick="buttonLogicHandler(6,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R7</td>
-                        <td id="mipsRegister7">1010</td>
+                        <td id="mipsRegister7">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister7BinaryButton" onclick="buttonLogicHandler(7,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister7DecimalButton" onclick="buttonLogicHandler(7,'decimal')">Decimal</a>>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister7HexButton" onclick="buttonLogicHandler(7,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister7DecimalButton" onclick="buttonLogicHandler(7,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister7BinaryButton" onclick="buttonLogicHandler(7,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R8</td>
-                        <td id="mipsRegister8">1010</td>
+                        <td id="mipsRegister8">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister8BinaryButton" onclick="buttonLogicHandler(8,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister8DecimalButton" onclick="buttonLogicHandler(8,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister8HexButton" onclick="buttonLogicHandler(8,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister8DecimalButton" onclick="buttonLogicHandler(8,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister8BinaryButton" onclick="buttonLogicHandler(8,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R9</td>
-                        <td id="mipsRegister9">1010</td>
+                        <td id="mipsRegister9">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister9BinaryButton" onclick="buttonLogicHandler(9,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister9DecimalButton" onclick="buttonLogicHandler(9,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister9HexButton" onclick="buttonLogicHandler(9,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister9DecimalButton" onclick="buttonLogicHandler(9,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister9BinaryButton" onclick="buttonLogicHandler(9,'binary')">Binary</a>
                         </td>
                     </tr>
                     <tr>
                         <td>R10</td>
-                        <td id="mipsRegister10">1010</td>
+                        <td id="mipsRegister10">0</td>
                         <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister10BinaryButton" onclick="buttonLogicHandler(10,'binary')">Binary</a>&ensp;
+                            <a class="btn waves-effect waves-light red" id="mipsRegister10DecimalButton" onclick="buttonLogicHandler(10,'decimal')">Decimal</a>&ensp;
                             <a class="btn waves-effect waves-light black" id="mipsRegister10HexButton" onclick="buttonLogicHandler(10,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister10DecimalButton" onclick="buttonLogicHandler(10,'decimal')">Decimal</a>
+                            <a class="btn waves-effect waves-light black" id="mipsRegister10BinaryButton" onclick="buttonLogicHandler(10,'binary')">Binary</a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>R11</td>
-                        <td id="mipsRegister11">1010</td>
-                        <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister11BinaryButton" onclick="buttonLogicHandler(11,'binary')">Binary</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister11HexButton" onclick="buttonLogicHandler(11,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister11DecimalButton" onclick="buttonLogicHandler(11,'decimal')">Decimal</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>R12</td>
-                        <td id="mipsRegister12">1010</td>
-                        <td>
-                            <a class="btn waves-effect waves-light red" id="mipsRegister12BinaryButton" onclick="buttonLogicHandler(12,'binary')">Binary</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister12HexButton" onclick="buttonLogicHandler(12,'hex')">HEX</a>&ensp;
-                            <a class="btn waves-effect waves-light black" id="mipsRegister12DecimalButton" onclick="buttonLogicHandler(12,'decimal')">Decimal</a>
-                        </td>
-                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="highlight" id="registerSet2">
+                    <thead>
+                        <tr>
+                            <th data-field="register">Register</th>
+                            <th data-field="value">Value</th>
+                            <th data-field="notation">Notation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>R11</td>
+                            <td id="mipsRegister11">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister11DecimalButton" onclick="buttonLogicHandler(11,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister11HexButton" onclick="buttonLogicHandler(11,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister11BinaryButton" onclick="buttonLogicHandler(11,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R12</td>
+                            <td id="mipsRegister12">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister12DecimalButton" onclick="buttonLogicHandler(12,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister12HexButton" onclick="buttonLogicHandler(12,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister12BinaryButton" onclick="buttonLogicHandler(12,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R13</td>
+                            <td id="mipsRegister13">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister13DecimalButton" onclick="buttonLogicHandler(13,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister13HexButton" onclick="buttonLogicHandler(13,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister13BinaryButton" onclick="buttonLogicHandler(13,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R14</td>
+                            <td id="mipsRegister14">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister14DecimalButton" onclick="buttonLogicHandler(14,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister14HexButton" onclick="buttonLogicHandler(14,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister14BinaryButton" onclick="buttonLogicHandler(14,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R15</td>
+                            <td id="mipsRegister15">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister15DecimalButton" onclick="buttonLogicHandler(15,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister15HexButton" onclick="buttonLogicHandler(15,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister15BinaryButton" onclick="buttonLogicHandler(15,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R16</td>
+                            <td id="mipsRegister16">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister16DecimalButton" onclick="buttonLogicHandler(16,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister16HexButton" onclick="buttonLogicHandler(16,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister16BinaryButton" onclick="buttonLogicHandler(16,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R17</td>
+                            <td id="mipsRegister17">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister17DecimalButton" onclick="buttonLogicHandler(17,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister17HexButton" onclick="buttonLogicHandler(17,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister17BinaryButton" onclick="buttonLogicHandler(17,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R18</td>
+                            <td id="mipsRegister18">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister18DecimalButton" onclick="buttonLogicHandler(18,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister18HexButton" onclick="buttonLogicHandler(18,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister18BinaryButton" onclick="buttonLogicHandler(18,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R19</td>
+                            <td id="mipsRegister19">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister19DecimalButton" onclick="buttonLogicHandler(19,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister19HexButton" onclick="buttonLogicHandler(19,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister19BinaryButton" onclick="buttonLogicHandler(19,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R20</td>
+                            <td id="mipsRegister20">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister20DecimalButton" onclick="buttonLogicHandler(20,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister20HexButton" onclick="buttonLogicHandler(20,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister20BinaryButton" onclick="buttonLogicHandler(20,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R21</td>
+                            <td id="mipsRegister21">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister21DecimalButton" onclick="buttonLogicHandler(21,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister21HexButton" onclick="buttonLogicHandler(21,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister21BinaryButton" onclick="buttonLogicHandler(21,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="highlight" id="registerSet3">
+                    <thead>
+                        <tr>
+                            <th data-field="register">Register</th>
+                            <th data-field="value">Value</th>
+                            <th data-field="notation">Notation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>R22</td>
+                            <td id="mipsRegister22">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister22DecimalButton" onclick="buttonLogicHandler(22,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister22HexButton" onclick="buttonLogicHandler(22,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister22BinaryButton" onclick="buttonLogicHandler(22,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R23</td>
+                            <td id="mipsRegister23">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister23DecimalButton" onclick="buttonLogicHandler(23,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister23HexButton" onclick="buttonLogicHandler(23,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister23BinaryButton" onclick="buttonLogicHandler(23,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R24</td>
+                            <td id="mipsRegister24">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister24DecimalButton" onclick="buttonLogicHandler(24,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister24HexButton" onclick="buttonLogicHandler(24,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister24BinaryButton" onclick="buttonLogicHandler(24,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R25</td>
+                            <td id="mipsRegister25">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister25DecimalButton" onclick="buttonLogicHandler(25,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister25HexButton" onclick="buttonLogicHandler(25,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister25BinaryButton" onclick="buttonLogicHandler(25,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R26</td>
+                            <td id="mipsRegister26">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister26DecimalButton" onclick="buttonLogicHandler(26,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister26HexButton" onclick="buttonLogicHandler(26,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister26BinaryButton" onclick="buttonLogicHandler(26,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R27</td>
+                            <td id="mipsRegister27">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister27DecimalButton" onclick="buttonLogicHandler(27,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister27HexButton" onclick="buttonLogicHandler(27,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister27BinaryButton" onclick="buttonLogicHandler(27,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R28</td>
+                            <td id="mipsRegister28">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister28DecimalButton" onclick="buttonLogicHandler(28,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister28HexButton" onclick="buttonLogicHandler(28,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister28BinaryButton" onclick="buttonLogicHandler(28,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R29</td>
+                            <td id="mipsRegister29">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister29DecimalButton" onclick="buttonLogicHandler(29,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister29HexButton" onclick="buttonLogicHandler(29,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister29BinaryButton" onclick="buttonLogicHandler(29,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R30</td>
+                            <td id="mipsRegister30">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister30DecimalButton" onclick="buttonLogicHandler(30,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister30HexButton" onclick="buttonLogicHandler(30,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister30BinaryButton" onclick="buttonLogicHandler(30,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>R31</td>
+                            <td id="mipsRegister31">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister31DecimalButton" onclick="buttonLogicHandler(31,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister31HexButton" onclick="buttonLogicHandler(31,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister31BinaryButton" onclick="buttonLogicHandler(31,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table class="highlight" id="PC">
+                    <thead>
+                        <tr>
+                            <th data-field="register">Register</th>
+                            <th data-field="value">Value</th>
+                            <th data-field="notation">Notation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>PC</td>
+                            <td id="mipsRegister-1">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister-1DecimalButton" onclick="buttonLogicHandler(-1,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister-1HexButton" onclick="buttonLogicHandler(-1,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister-1BinaryButton" onclick="buttonLogicHandler(-1,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>nextPC</td>
+                            <td id="mipsRegister-2">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister-2DecimalButton" onclick="buttonLogicHandler(-2,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister-2HexButton" onclick="buttonLogicHandler(-2,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister-2BinaryButton" onclick="buttonLogicHandler(-2,'binary')">Binary</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>nextNextPC</td>
+                            <td id="mipsRegister-3">1010</td>
+                            <td>
+                                <a class="btn waves-effect waves-light red" id="mipsRegister-3DecimalButton" onclick="buttonLogicHandler(-3,'decimal')">Decimal</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister-3HexButton" onclick="buttonLogicHandler(-3,'hex')">HEX</a>&ensp;
+                                <a class="btn waves-effect waves-light black" id="mipsRegister-3BinaryButton" onclick="buttonLogicHandler(-3,'binary')">Binary</a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
