@@ -1,0 +1,6 @@
+ADDI 32,6,11	   # this is a comment!
+AND 1,2,3      # this is a comment!
+AND 1,2,4      # this is a comment!
+AND 1,2,5      # this is a comment!
+AND 1,2,6      # this is a comment!
+AND 1,2,7      # this is a comment!
