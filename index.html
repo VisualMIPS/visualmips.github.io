@@ -10,8 +10,7 @@
         <link rel="stylesheet" href="./assets/css/main.css" />
     </head>
     <body>
-        <div class="row" style="margin-left: -0.718rem;margin-right: -0.65rem;">
-
+        <div class="row">
                 <div class="col s12 m12 l6">
                     <textarea id="editor"></textarea>
                     <br>
@@ -424,7 +423,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
         <script>
             // styleActiveLine bug on Android Chrome
-            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+            // |webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini
+            if( /Android/i.test(navigator.userAgent) ) {
                 // do nothing
             }else
             {
