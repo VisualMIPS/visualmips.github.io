@@ -1,0 +1,14 @@
+{
+  "name": "VisualMIPS",
+  "productName": "VisualMIPS",
+  "version": "0.1.0",
+  "main": "ElectronMain.js",
+  "devDependencies": {},
+  "dependencies": {
+    "dialog": "^0.2.0",
+    "electron-connect": "^0.6.1",
+    "electron-default-menu": "^1.0.0"
+  },
+ "author": "Wei Jian Wong",
+ "license": "ISC"
+}
