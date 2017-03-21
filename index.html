@@ -444,10 +444,20 @@
                 //# sourceMappingURL=active-line.min.js.map
             }
             $(document).ready(function() {
-                $('#memory').DataTable({
-                    paging : false
+                $('#execute').click(function(){
+                    
+                  if(typeof table === 'undefined' || !table){
+                  }
+                  else{
+                      table.destroy()
+                  }
+                  setTimeout(function() {
+                        table = $('#memory').DataTable({
+                            paging : false
+                        });
+                    }, 1000);
                 });
-            } );
+            });
         </script>
         <script src="./assets/js/bundle.js"></script>
         <script src="./assets/js/helperfunctions.js"></script>
